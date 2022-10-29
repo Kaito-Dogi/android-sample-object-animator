@@ -9,7 +9,8 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import app.doggy.objectanimatorsample.databinding.ActivityMainBinding
-import app.doggy.objectanimatorsample.ui.AddPositionDialog
+import app.doggy.objectanimatorsample.model.Dancer
+import app.doggy.objectanimatorsample.model.Position
 import java.util.Date
 
 class MainActivity : AppCompatActivity() {
@@ -21,11 +22,28 @@ class MainActivity : AppCompatActivity() {
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
+    val mockDancer = Dancer(
+      "MOCK",
+      listOf(
+        Position(300f, 0f),
+        Position(300f, 300f),
+        Position(0f, 300f),
+        Position(0f, 0f),
+      ),
+    )
+
+    var count = 0
+
     binding.circle.setOnClickListener {
       it.startMoveToPointAnim(
-        transX = 500f,
-        transY = 500f,
+        transX = mockDancer.positionList[count].x,
+        transY = mockDancer.positionList[count].y,
       )
+      if (count < mockDancer.positionList.size - 1) {
+        count++
+      } else {
+        count = 0
+      }
     }
 
     binding.addButton.setOnClickListener {
