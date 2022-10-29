@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
+  // View を移動させる
   private fun View.startMoveToPointAnim(transX: Float, transY: Float) {
     val translationX = PropertyValuesHolder.ofFloat(View.TRANSLATION_X, transX)
     val translationY = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, transY)
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     animator.start()
   }
 
+  // クリックした位置を取得する
   override fun onTouchEvent(event: MotionEvent?): Boolean {
     when (event?.action) {
       MotionEvent.ACTION_DOWN -> {
