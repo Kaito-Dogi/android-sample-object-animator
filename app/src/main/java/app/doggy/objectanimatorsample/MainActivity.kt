@@ -11,9 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import app.doggy.objectanimatorsample.databinding.ActivityMainBinding
 import app.doggy.objectanimatorsample.model.Dancer
 import app.doggy.objectanimatorsample.model.Position
+import app.doggy.objectanimatorsample.ui.AddPositionDialog
 import java.util.Date
 
 class MainActivity : AppCompatActivity() {
+
+  companion object {
+    private const val POSITION = "POSITION"
+  }
 
   private lateinit var binding: ActivityMainBinding
 
@@ -74,5 +79,3 @@ class MainActivity : AppCompatActivity() {
     return super.onTouchEvent(event)
   }
 }
-
-private const val POSITION = "POSITION"
