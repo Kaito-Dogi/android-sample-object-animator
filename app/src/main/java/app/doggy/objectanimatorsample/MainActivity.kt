@@ -3,10 +3,13 @@ package app.doggy.objectanimatorsample
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.os.Bundle
+import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import app.doggy.objectanimatorsample.databinding.ActivityMainBinding
+import java.util.Date
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,4 +37,17 @@ class MainActivity : AppCompatActivity() {
     }
     animator.start()
   }
+
+  override fun onTouchEvent(event: MotionEvent?): Boolean {
+    when (event?.action) {
+      MotionEvent.ACTION_DOWN -> {
+        Log.d(POSITION, "==== ${Date()} ====")
+        Log.d(POSITION, "X: ${event.x}")
+        Log.d(POSITION, "Y: ${event.y}")
+      }
+    }
+    return super.onTouchEvent(event)
+  }
 }
+
+private const val POSITION = "POSITION"
