@@ -9,6 +9,7 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import app.doggy.objectanimatorsample.databinding.ActivityMainBinding
+import app.doggy.objectanimatorsample.ui.AddPositionDialog
 import java.util.Date
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +26,10 @@ class MainActivity : AppCompatActivity() {
         transX = 500f,
         transY = 500f,
       )
+    }
+
+    binding.addButton.setOnClickListener {
+      AddPositionDialog().show(supportFragmentManager, AddPositionDialog::class.simpleName)
     }
   }
 
