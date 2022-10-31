@@ -4,17 +4,17 @@ import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import app.doggy.objectanimatorsample.databinding.ActivityMainBinding
 import app.doggy.objectanimatorsample.model.Dancer
 import app.doggy.objectanimatorsample.model.Position
 import app.doggy.objectanimatorsample.ui.AddPositionDialog
 import java.util.Date
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AddPositionDialog.OnClickListener {
 
   companion object {
     private const val POSITION = "POSITION"
@@ -68,14 +68,20 @@ class MainActivity : AppCompatActivity() {
   }
 
   // クリックした位置を取得する
-  override fun onTouchEvent(event: MotionEvent?): Boolean {
-    when (event?.action) {
-      MotionEvent.ACTION_DOWN -> {
-        Log.d(POSITION, "==== ${Date()} ====")
-        Log.d(POSITION, "X: ${event.x}")
-        Log.d(POSITION, "Y: ${event.y}")
-      }
-    }
-    return super.onTouchEvent(event)
+  // override fun onTouchEvent(event: MotionEvent?): Boolean {
+  //   when (event?.action) {
+  //     MotionEvent.ACTION_DOWN -> {
+  //       Log.d(POSITION, "==== ${Date()} ====")
+  //       Log.d(POSITION, "X: ${event.x}")
+  //       Log.d(POSITION, "Y: ${event.y}")
+  //     }
+  //   }
+  //   return super.onTouchEvent(event)
+  // }
+
+  override fun onAddButtonClick(dialog: DialogFragment, x: Float, y: Float) {
+    Log.d(POSITION, "X: $x")
+    Log.d(POSITION, "Y: $y")
+    mutablePositionList.add(Position(x, y))
   }
 }
