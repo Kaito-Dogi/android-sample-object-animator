@@ -12,7 +12,6 @@ import app.doggy.objectanimatorsample.databinding.ActivityMainBinding
 import app.doggy.objectanimatorsample.model.Dancer
 import app.doggy.objectanimatorsample.model.Position
 import app.doggy.objectanimatorsample.ui.AddPositionDialog
-import java.util.Date
 
 class MainActivity : AppCompatActivity(), AddPositionDialog.OnClickListener {
 
@@ -22,29 +21,28 @@ class MainActivity : AppCompatActivity(), AddPositionDialog.OnClickListener {
 
   private lateinit var binding: ActivityMainBinding
 
+  private val mutablePositionList: MutableList<Position> = mutableListOf()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-    val mockDancer = Dancer(
-      "MOCK",
-      listOf(
-        Position(300f, 0f),
-        Position(300f, 300f),
-        Position(0f, 300f),
-        Position(0f, 0f),
-      ),
-    )
-
     var count = 0
+    var dancer: Dancer? = null
 
     binding.circle.setOnClickListener {
+      if (dancer == null) {
+        dancer = Dancer(
+          name = "",
+          positionList = mutablePositionList,
+        )
+      }
       it.startMoveToPointAnim(
-        transX = mockDancer.positionList[count].x,
-        transY = mockDancer.positionList[count].y,
+        transX = dancer?.positionList?.get(count)?.x ?: return@setOnClickListener,
+        transY = dancer?.positionList?.get(count)?.y ?: return@setOnClickListener,
       )
-      if (count < mockDancer.positionList.size - 1) {
+      if (count < (dancer?.positionList?.size?.minus(1) ?: return@setOnClickListener)) {
         count++
       } else {
         count = 0
