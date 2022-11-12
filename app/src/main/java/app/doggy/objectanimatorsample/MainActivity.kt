@@ -31,26 +31,26 @@ class MainActivity : AppCompatActivity(), AddPositionDialog.OnClickListener {
     var count = 0
     var dancer: Dancer? = null
 
-    binding.circle.setOnClickListener {
-      if (dancer == null) {
-        dancer = Dancer(
-          name = "",
-          positionList = mutablePositionList,
-        )
-      }
-      it.startMoveToPointAnim(
-        transX = dancer?.positionList?.get(count)?.x ?: return@setOnClickListener,
-        transY = dancer?.positionList?.get(count)?.y ?: return@setOnClickListener,
-      )
-      if (count < (dancer?.positionList?.size?.minus(1) ?: return@setOnClickListener)) {
-        count++
-      } else {
-        count = 0
-      }
-    }
+    // binding.circle.setOnClickListener {
+    //   if (dancer == null) {
+    //     dancer = Dancer(
+    //       name = "",
+    //       positionList = mutablePositionList,
+    //     )
+    //   }
+    //   it.startMoveToPointAnim(
+    //     transX = dancer?.positionList?.get(count)?.x ?: return@setOnClickListener,
+    //     transY = dancer?.positionList?.get(count)?.y ?: return@setOnClickListener,
+    //   )
+    //   if (count < (dancer?.positionList?.size?.minus(1) ?: return@setOnClickListener)) {
+    //     count++
+    //   } else {
+    //     count = 0
+    //   }
+    // }
 
     binding.addButton.setOnClickListener {
-      AddPositionDialog().show(supportFragmentManager, AddPositionDialog::class.simpleName)
+      // AddPositionDialog().show(supportFragmentManager, AddPositionDialog::class.simpleName)
     }
   }
 
