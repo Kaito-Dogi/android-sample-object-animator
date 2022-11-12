@@ -9,6 +9,7 @@ import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import app.doggy.objectanimatorsample.databinding.ActivityMainBinding
+import app.doggy.objectanimatorsample.databinding.ViewCircleBinding
 import app.doggy.objectanimatorsample.model.Dancer
 import app.doggy.objectanimatorsample.model.Position
 import app.doggy.objectanimatorsample.ui.AddPositionDialog
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity(), AddPositionDialog.OnClickListener {
     var count = 0
     var dancer: Dancer? = null
 
+    val dancerViews = mutableListOf<View>()
+
     // binding.circle.setOnClickListener {
     //   if (dancer == null) {
     //     dancer = Dancer(
@@ -49,8 +52,35 @@ class MainActivity : AppCompatActivity(), AddPositionDialog.OnClickListener {
     //   }
     // }
 
+    binding.playButton.setOnClickListener {
+      dancerViews.forEach {
+        it.startMoveToPointAnim(
+          transX = 100f,
+          transY = 100f,
+        )
+      }
+    }
+
     binding.addButton.setOnClickListener {
       // AddPositionDialog().show(supportFragmentManager, AddPositionDialog::class.simpleName)
+
+      val circleView = ViewCircleBinding.inflate(
+        layoutInflater,
+        binding.root,
+        false,
+      ).apply {
+        root.id = View.generateViewId()
+        root.x = 100.0f * root.id
+        root.y = 100.0f * root.id
+        root.setOnClickListener {
+          Log.d("あああ", "CLICKED: ${root.id}")
+        }
+      }
+
+      Log.d("あああ", "GENERATED: ${circleView.root.id}")
+
+      binding.root.addView(circleView.root)
+      dancerViews.add(circleView.root)
     }
   }
 
