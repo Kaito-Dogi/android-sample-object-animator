@@ -9,6 +9,17 @@
   >
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/play_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:contentDescription="play position"
+    app:layout_constraintBottom_toTopOf="@id/add_button"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:srcCompat="@drawable/ic_baseline_play_arrow_24"
+    />
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/add_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
