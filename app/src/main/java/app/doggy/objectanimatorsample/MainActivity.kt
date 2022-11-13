@@ -29,10 +29,12 @@ class MainActivity : AppCompatActivity(), AddPositionDialog.OnClickListener {
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-    var count = 0
-    var dancer: Dancer? = null
+    var sceneCount = 0
 
-    val dancerViews = mutableListOf<View>()
+    // TODO: id が一致する Dancer の positionList に値を追加する
+    var selectedDancerId = 0
+
+    val dancers = mutableListOf<Dancer>()
 
     // binding.circle.setOnClickListener {
     //   if (dancer == null) {
@@ -53,15 +55,17 @@ class MainActivity : AppCompatActivity(), AddPositionDialog.OnClickListener {
     // }
 
     binding.playButton.setOnClickListener {
-      dancerViews.forEach {
-        it.startMoveToPointAnim(
-          transX = 100f,
-          transY = 100f,
+      dancers.forEach { dancer ->
+        val dancerView = binding.root.getViewById(dancer.id)
+        dancerView.startMoveToPointAnim(
+          transX = dancer.positionList[sceneCount].x,
+          transY = dancer.positionList[sceneCount].y,
         )
       }
     }
 
     binding.addButton.setOnClickListener {
+      // TODO: 初期位置を指定して、Circle を追加する
       // AddPositionDialog().show(supportFragmentManager, AddPositionDialog::class.simpleName)
 
       val circleView = ViewCircleBinding.inflate(
@@ -69,18 +73,27 @@ class MainActivity : AppCompatActivity(), AddPositionDialog.OnClickListener {
         binding.root,
         false,
       ).apply {
-        root.id = View.generateViewId()
-        root.x = 100.0f * root.id
-        root.y = 100.0f * root.id
+        val viewId = View.generateViewId()
+        val dancer = Dancer(
+          id = viewId,
+          name = "",
+          positionList = listOf(
+            Position(
+              x = 100f * viewId,
+              y = 100f * viewId,
+            ),
+          ),
+        )
+        dancers.add(dancer)
+
+        root.id = dancer.id
+        root.x = dancer.positionList[0].x
+        root.y = dancer.positionList[0].y
         root.setOnClickListener {
-          Log.d("あああ", "CLICKED: ${root.id}")
+          selectedDancerId = root.id
         }
       }
-
-      Log.d("あああ", "GENERATED: ${circleView.root.id}")
-
       binding.root.addView(circleView.root)
-      dancerViews.add(circleView.root)
     }
   }
 
