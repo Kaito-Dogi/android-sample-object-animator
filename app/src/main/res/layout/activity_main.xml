@@ -8,16 +8,15 @@
   tools:context=".MainActivity"
   >
 
-  <View
-    android:id="@+id/circle"
-    android:layout_width="32dp"
-    android:layout_height="32dp"
-    android:background="@drawable/circle_shape"
-    android:backgroundTint="@color/purple_200"
-    app:layout_constraintBottom_toBottomOf="parent"
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/play_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:contentDescription="play position"
+    app:layout_constraintBottom_toTopOf="@id/add_button"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/ic_baseline_play_arrow_24"
     />
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
